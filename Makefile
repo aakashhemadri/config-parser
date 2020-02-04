@@ -4,9 +4,10 @@ all: clean build
 
 .PHONY: clean
 clean:
-	@echo -e "\n> Cleaning build files..."
+	@echo -e "\n> Cleaning build & cache files..."
 	rm -rf build/
 	rm -f ${BINARY}
+	rm -f *.pts*
 	@echo "> Done."
 
 .PHONY: build
