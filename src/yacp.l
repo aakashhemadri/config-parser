@@ -15,7 +15,7 @@ set (set)[ ]+{var}[ ]+{name}
 %%
 
 {comment} {
-    std::cout<<"Comment";
+    std::cout<<"comment";
 }
 {set} {
     std::cout<<"set";
