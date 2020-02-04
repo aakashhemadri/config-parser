@@ -1,4 +1,5 @@
 *.yy.c*
+*.pts*
 build/
 yacp
 

@@ -12,17 +12,17 @@ clean:
 .PHONY: build
 build:
 	@echo -e "\n> Starting build..."
-	@echo "> Making directories..."
-	mkdir -p build
+	@echo "> Making build directories..."
+	mkdir -p build/dist
 	@echo -e "> Done."
 	@echo -e "\n> Building lex output for ${BINARY}..."	
-	lex -o build/${BINARY}.yy.cc src/yacp.l
+	lex -o build/${BINARY}.yy.cc src/${BINARY}.l
 	@echo -e "> Done."
 	@echo -e "\n> Compiling ${BINARY}..."
-	g++ -Iinclude -o build/${BINARY} build/${BINARY}.yy.cc
+	g++ -Iinclude -o build/dist/${BINARY} build/${BINARY}.yy.cc
 	@echo -e "> Done."
 	@echo -e "\n> Linking ${BINARY}..."
-	ln -sf build/${BINARY} .
+	ln -sf build/dist/${BINARY} .
 	@echo -e "> Done."
 
 .PHONY: install
