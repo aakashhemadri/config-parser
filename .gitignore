@@ -1,4 +1,7 @@
 *.yy.c*
+build/
+yacp
+
 # Prerequisites
 *.d
 

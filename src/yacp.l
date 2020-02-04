@@ -6,9 +6,9 @@
 
 comment ^#.*
 name .+
-arg (ARG_DEF)
-modifier (MODIFIER_DEF)
-resource (RESOURCES_DEF)[ ]+{arg}[ ]+{modifier}
+arg (resolution)
+modifier (1920*1024)
+resource (screen)[ ]+{arg}[ ]+{modifier}
 var [_a-zA-Z][_a-zA-Z0-9]*
 set (set)[ ]+{var}[ ]+{name}
 
