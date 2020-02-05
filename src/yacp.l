@@ -8,7 +8,7 @@ int col = 0, last_col = 0, line = 0;
 %}
 
 comment ^#.*
-name [a-zA-Z0-9!@#\$%\^&\*\(\)\\\/_\-\[\]\{\}\+=<>.""]+[\n]
+name [a-zA-Z0-9!@#&%_=<>,'"\$\^\*\(\)\\\/\-\[\]\{\}\+\.]+
 
 arg_screen resolution|brightness
 arg_keyboard backlit|layout|region
@@ -19,39 +19,40 @@ mod_keyboard [0 - 3]|qwerty|dvorak|us|uk
 resource screen|keyboard
 
 var [_a-zA-Z][_a-zA-Z0-9]*
-set (set)[ ]+{var}[ ]+{name}
+set set[ ]+{var}[ ]+{name}
 
 %x MATCH
 
-%x screen
-%x keyboard
+%x SCREEN 
+%x KEYBOARD
 
 %%
-BEGIN(MATCH)
-<match>{comment} {
+
+{comment} {
     line++;
     std::cout<<"This a comment\n";
+    yy
 }
-<match>{set} {
+{set} {
     line++;
     std::cout<<"This is a set\n";
 }
-<match>{resource} {
+{resource} {
     line++;
     if(strcmp(yytext,"screen")){
-        BEGIN(screen)
+        BEGIN(SCREEN);
     }
     else {
-        BEGIN(keyboard)
+        BEGIN(KEYBOARD);
     }
 }
 
-<screen>{arg_screen}[]{mod_screen} {
-    
+<SCREEN>{arg_screen}[ ]{mod_screen} {
+    std::cout<<yytext<<" \n";
 }
 
-<keyboard>{arg_keyboard}[]{mod_keyboard} {
-    
+<KEYBOARD>{arg_keyboard}[ ]{mod_keyboard} {
+    std::cout<<yytext<<" \n";
 }
 
 . col++; 
@@ -60,7 +61,6 @@ line++;
 col = col - last_col;
 last_col = col;
 std::cout<<"Parse error at line: "<<line<<" & col: "<<col<<std::endl;
-return 1;
 }
 %%
 
