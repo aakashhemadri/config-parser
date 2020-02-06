@@ -31,7 +31,6 @@ set set[ ]+{var}[ ]+{name}
 {comment} {
     line++;
     std::cout<<"This a comment\n";
-    yy
 }
 {set} {
     line++;
